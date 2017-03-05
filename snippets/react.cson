@@ -1,148 +1,199 @@
-".source.js.jsx":
-  "import empty()":
-    prefix: "i"
-    body: "import ${1} from '${2}';"
+'.source.js.jsx':
+  # import
+  'import react':
+    prefix: 'ir'
+    body: "import React, { ${1:Component, }${2:PropTypes} } from 'react';${3}"
 
-  "import()":
-    prefix: "ir"
-    body: "import React from 'react';"
+  'import react-dom':
+    prefix: 'ird'
+    body: "import { ${1:findDOMNode} } from 'react-dom';${2}"
 
-  "import() with PropTypes":
-    prefix: "irp"
-    body: "import React, { PropTypes } from 'react';"
+  ## component lifecycle
+  'render()':
+    prefix: 'ren'
+    body: """
+      render() {
+      \treturn (
+      \t\t${1:<div>${2}</div>}
+      \t);
+      }${3}
+    """
 
-  "import react-dom()":
-    prefix: "ird"
-    body: "import { findDOMNode } from 'react-dom';"
+  # mounting
+  'constructor(props)':
+    prefix: 'cns'
+    body: """
+      constructor(props) {
+      \tsuper(props);
 
-  "componentDidMount() { ... }":
-    prefix: "cdm"
-    body: "componentDidMount() {\n\t${1}\n}${2}"
+      \t${1:this.state = ${2};}
+      }${3}
+    """
 
-  "componentDidUpdate(pp, ps) { ... }":
-    prefix: "cdup"
-    body: "componentDidUpdate(prevProps, prevState) {\n\t${1}\n}${2}"
+  'componentWillMount()':
+    prefix: 'cwm'
+    body: """
+      componentWillMount() {
+      \t${1}
+      }${2}
+    """
 
-  "componentWillMount() { ... }":
-    prefix: "cwm"
-    body: "componentWillMount() {\n\t${1}\n}${2}"
+  'componentDidMount()':
+    prefix: 'cdm'
+    body: """
+      componentDidMount() {
+      \t${1}
+      }${2}
+    """
 
-  "componentWillReceiveProps(np) { ... }":
-    prefix: "cwr"
-    body: "componentWillReceiveProps(nextProps) {\n\t${1}\n}${2}"
+  # updating
+  'componentWillReceiveProps(np) { ... }':
+    prefix: 'cwr'
+    body: """
+      componentWillReceiveProps(nextProps) {
+      \t${1}
+      }${2}
+    """
 
-  "componentWillUnmount() { ... }":
-    prefix: "cwun"
-    body: "componentWillUnmount() {\n\t${1}\n}${2}"
+  'shouldComponentUpdate(np, ns) { ... }':
+    prefix: 'scu'
+    body: """
+      shouldComponentUpdate(nextProps, nextState) {
+      \t${1}
+      }${2}
+    """
 
-  "componentWillUpdate(np, ns) { ... }":
-    prefix: "cwu"
-    body: "componentWillUpdate(nextProps, nextState) {\n\t${1}\n}${2}"
+  'componentWillUpdate(np, ns) { ... }':
+    prefix: 'cwu'
+    body: """
+      componentWillUpdate(nextProps, nextState) {
+      \t${1}
+      }${2}
+    """
 
-  "forceUpdate(...)":
-    prefix: "fup"
-    body: "forceUpdate(${1:callback});"
+  'componentDidUpdate(pp, ps) { ... }':
+    prefix: 'cdup'
+    body: """
+      componentDidUpdate(prevProps, prevState) {
+      \t${1}
+      }${2}
+    """
 
-  "getDefaultProps() { return {...} } ":
-    prefix: "gdp"
-    body: "getDefaultProps() {\n\treturn {\n\t\t${1}\n\t};\n},"
+  # unmounting
+  'componentWillUnmount() { ... }':
+    prefix: 'cwun'
+    body: """
+      componentWillUnmount() {
+      \t${1}
+      }${2}
+    """
 
-  "getInitialState() { return {...} } ":
-    prefix: "gis"
-    body: "getInitialState() {\n\treturn {\n\t\t${1}: ${2}\n\t};\n},"
+  ## other apis
+  'setState({ ... })':
+    prefix: 'sst'
+    body: """
+      this.setState(${1:(state${2:, props}) => }{
+      \t${3}
+      });${4}
+    """
 
-  "isMounted()":
-    prefix: "ism"
-    body: "isMounted()"
+  'forceUpdate(...)':
+    prefix: 'fup'
+    body: 'forceUpdate(${1:callback});'
 
-  "Class.contextTypes = { ... }":
-    prefix: "cct"
-    body: "${1}.contextTypes = {\n\t${2}: React.PropTypes.${3:string}\n};"
+  ## class properties
+  'Class.defaultProps = { ... }':
+    prefix: 'cdp'
+    body: """
+      ${1}.defaultProps = {
+      \t${2}
+      };${3}
+    """
 
-  "Class.propTypes = { ... }":
-    prefix: "cpt"
-    body: "${1}.propTypes = {\n\t${2}: React.PropTypes.${3:string}\n};"
+  'Class.propTypes = { ... }':
+    prefix: 'cpt'
+    body: """
+      ${1}.propTypes = {
+      \t${2}
+      };${3}
+    """
 
-  "Class.defaultProps = { ... }":
-    prefix: "cdp"
-    body: "${1}.defaultProps = {\n\t${2}: ${3}\n};"
+  'Class.contextTypes = { ... }':
+    prefix: 'cct'
+    body: """
+      ${1}.contextTypes = {
+      \t${2}
+      };${3}
+    """
 
-  "static contextTypes = { ... }":
-    prefix: "scct"
-    body: "static contextTypes = {\n\t${1}: PropTypes.${2:string}\n}"
+  'static defaultProps = { ... }':
+    prefix: 'scdp'
+    body: """
+      static defaultProps = {
+      \t${1}
+      };${2}
+    """
 
-  "static propTypes = { ... }":
-    prefix: "scpt"
-    body: "static propTypes = {\n\t${1}: PropTypes.${2:string}\n}"
+  'static propTypes = { ... }':
+    prefix: 'scpt'
+    body: """
+      static propTypes = {
+      \t${1}
+      };${2}
+    """
 
-  "static defaultProps = { ... }":
-    prefix: "scdp"
-    body: "static defaultProps = {\n\t${1}: ${2}\n}"
+  'static contextTypes = { ... }':
+    prefix: 'scct'
+    body: """
+      static contextTypes = {
+      \t${1}
+      };${2}
+    """
 
-  "propTypes { ... }":
-    prefix: "pt"
-    body: "propTypes: {\n\t${1}: React.PropTypes.${2:string}\n},"
+  ## instance properties
+  'PropTypes.':
+      prefix: 'rpt'
+      body: '${1:children}: PropTypes.${2:node}${3:.isRequired}${4:,}'
 
-  "React.PropTypes.":
-      prefix: "rpt"
-      body: "React.PropTypes."
+  'PropTypes.':
+      prefix: 'rpt'
+      body: '${1:children}: PropTypes.${2:node}${3:.isRequired}${4:,}'
 
-  "class skeleton":
-    prefix: "cer"
-    body: "import React from 'react';\n\nclass ${1} extends React.Component {\n\n\trender() {\n\t\treturn (\n\t\t\t${2:<div></div>}\n\t\t);\n\t}\n\n}\n\nexport default ${1};"
+  'this.props.':
+    prefix: 'props'
+    body: 'this.props${1:.}'
 
-  "createClass skeleton":
-    prefix: "rcc"
-    body: "import React from 'react';\n\nexport default React.createClass({\n\n\trender() {\n\t\treturn (\n\t\t\t${1:<div></div>}\n\t\t);\n\t}\n\n});"
+  'this.state.':
+    prefix: 'state'
+    body: 'this.state${1:.}'
 
-  "Stateless Component":
-    prefix: "rsc"
-    body: "import React from 'react';\n\nconst ${1} = ({${2}}) => (\n\t<div>${4}</div>\n);\n\n${1}.propTypes = {\n\t${2}: React.PropTypes.${3}\n};\n\nexport default ${1};"
+  ## boilerplates
+  'Class Component':
+    prefix: 'rcc'
+    body: """
+      import React, { Component } from 'react';
 
-  "Stateless Component PropTypes":
-    prefix: "rscp"
-    body: "import React, {PropTypes} from 'react';\n\nconst ${1} = ({${2}}) => (\n\t<div>${4}</div>\n);\n\n${1}.propTypes = {\n\t${2}: PropTypes.${3}\n};\n\nexport default ${1};"
+      class ${1:Foo} extends Component {
+      \trender() {
+      \t\treturn (
+      \t\t\t${2:<div>${3}</div>}
+      \t\t);
+      \t}
+      }
 
-  "Stateless Function":
-    prefix: "rsf"
-    body: "const ${1} = ({${2}}) => (\n\t<div>{${2}}</div>\n);"
+      export default ${1:Foo};
+    """
 
-  "Component displayName":
-    prefix: "cdn"
-    body: "${1}.displayName = '${1}';"
+  'Stateless Component':
+    prefix: 'rsc'
+    body: """
+      import React from 'react';
 
-  "render() { return ... }":
-    prefix: "ren"
-    body: "render() {\n\treturn (\n\t\t${1:<div></div>}\n\t);\n}"
+      function ${1:Foo}(${2}) {
+      \treturn (
+      \t\t${3:<div>${4}</div>}
+      \t);
+      }
 
-  "setState({ ... })":
-    prefix: "sst"
-    body: "this.setState({\n\t${1}: ${2}\n});"
-
-  "shouldComponentUpdate(np, ns) { ... }":
-    prefix: "scu"
-    body: "shouldComponentUpdate(nextProps, nextState) {\n\t${1}\n}${2}"
-
-  "this.props.":
-    prefix: "props"
-    body: "this.props${1:.}"
-
-  "this.state.":
-    prefix: "state"
-    body: "this.state${1:.}"
-
-  "render(component, container, [callback])":
-    prefix: "rrc"
-    body: "React.render(${1:<$2 />}, ${3:document.body}${4:, ${5:callback}});"
-
-  "constructor(props)":
-    prefix: "cns"
-    body: "constructor(props) {\n\tsuper(props);\n\t${1:this.state = ${2};}\n}"
-
-  "class Foo extends Bar":
-    prefix: "clss"
-    body: "class ${1:Foo} extends ${2:React.Component} {\n\trender() {\n\t\t${3}\n\t}\n}"
-
-  "dangerouslySetInnerHTML":
-    prefix: "dnghtml"
-    body: "dangerouslySetInnerHTML={{__html: ${1}}}"
+      export default ${1:Foo};
+    """
