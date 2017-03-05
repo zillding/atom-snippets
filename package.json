@@ -1,0 +1,11 @@
+{
+  "name": "atom-snippets",
+  "version": "0.0.0",
+  "description": "atom editor snippets",
+  "keywords": [
+    "atom",
+    "snippets"
+  ],
+  "author": "Zill Ding",
+  "license": "ISC"
+}
