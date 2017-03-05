@@ -2,11 +2,11 @@
   # import
   'import react':
     prefix: 'ir'
-    body: "import React, { ${1:Component, }${2:PropTypes} } from 'react';${3}"
+    body: "import React, { ${1:Component, }${2:PropTypes} } from 'react'${3:;}"
 
   'import react-dom':
     prefix: 'ird'
-    body: "import { ${1:findDOMNode} } from 'react-dom';${2}"
+    body: "import { ${1:findDOMNode} } from 'react-dom'${2:;}"
 
   ## component lifecycle
   'render()':
@@ -15,8 +15,8 @@
       render() {
       \treturn (
       \t\t${1:<div>${2}</div>}
-      \t);
-      }${3}
+      \t)${3:;}
+      }
     """
 
   # mounting
@@ -47,7 +47,7 @@
     """
 
   # updating
-  'componentWillReceiveProps(np) { ... }':
+  'componentWillReceiveProps(np) {}':
     prefix: 'cwr'
     body: """
       componentWillReceiveProps(nextProps) {
@@ -55,7 +55,7 @@
       }${2}
     """
 
-  'shouldComponentUpdate(np, ns) { ... }':
+  'shouldComponentUpdate(np, ns) {}':
     prefix: 'scu'
     body: """
       shouldComponentUpdate(nextProps, nextState) {
@@ -63,7 +63,7 @@
       }${2}
     """
 
-  'componentWillUpdate(np, ns) { ... }':
+  'componentWillUpdate(np, ns) {}':
     prefix: 'cwu'
     body: """
       componentWillUpdate(nextProps, nextState) {
@@ -71,7 +71,7 @@
       }${2}
     """
 
-  'componentDidUpdate(pp, ps) { ... }':
+  'componentDidUpdate(pp, ps) {}':
     prefix: 'cdup'
     body: """
       componentDidUpdate(prevProps, prevState) {
@@ -80,7 +80,7 @@
     """
 
   # unmounting
-  'componentWillUnmount() { ... }':
+  'componentWillUnmount() {}':
     prefix: 'cwun'
     body: """
       componentWillUnmount() {
@@ -89,75 +89,75 @@
     """
 
   ## other apis
-  'setState({ ... })':
+  'setState()':
     prefix: 'sst'
     body: """
       this.setState(${1:(state${2:, props}) => }{
       \t${3}
-      });${4}
+      })${4:;}
     """
 
-  'forceUpdate(...)':
+  'forceUpdate()':
     prefix: 'fup'
-    body: 'forceUpdate(${1:callback});'
+    body: 'forceUpdate(${1:callback})${2:;}'
 
   ## class properties
-  'Class.defaultProps = { ... }':
+  'Class.defaultProps = {}':
     prefix: 'cdp'
     body: """
       ${1}.defaultProps = {
       \t${2}
-      };${3}
+      }${3:;}
     """
 
-  'Class.propTypes = { ... }':
+  'Class.propTypes = {}':
     prefix: 'cpt'
     body: """
       ${1}.propTypes = {
       \t${2}
-      };${3}
+      }${3:;}
     """
 
-  'Class.contextTypes = { ... }':
+  'Class.contextTypes = {}':
     prefix: 'cct'
     body: """
       ${1}.contextTypes = {
       \t${2}
-      };${3}
+      }${3:;}
     """
 
-  'static defaultProps = { ... }':
+  'static defaultProps = {}':
     prefix: 'scdp'
     body: """
       static defaultProps = {
       \t${1}
-      };${2}
+      }${2:;}
     """
 
-  'static propTypes = { ... }':
+  'static propTypes = {}':
     prefix: 'scpt'
     body: """
       static propTypes = {
       \t${1}
-      };${2}
+      }${2:;}
     """
 
-  'static contextTypes = { ... }':
+  'static contextTypes = {}':
     prefix: 'scct'
     body: """
       static contextTypes = {
       \t${1}
-      };${2}
+      }${2:;}
     """
 
   ## instance properties
   'PropTypes.':
-      prefix: 'rpt'
-      body: '${1:children}: PropTypes.${2:node}${3:.isRequired}${4:,}'
+    prefix: 'pt'
+    body: 'PropTypes.${1:string}${2:.isRequired}${3:,}'
 
-  'PropTypes.':
-      prefix: 'rpt'
-      body: '${1:children}: PropTypes.${2:node}${3:.isRequired}${4:,}'
+  ': PropTypes.':
+    prefix: 'rpt'
+    body: '${1:children}: PropTypes.${2:node}${3:.isRequired}${4:,}'
 
   'this.props.':
     prefix: 'props'
@@ -188,17 +188,15 @@
   'Class Component':
     prefix: 'rcc'
     body: """
-      import React, { Component } from 'react';
+      import React, { Component } from 'react'${4:;}
 
-      class ${1:Foo} extends Component {
+      export default class ${1:Foo} extends Component {
       \trender() {
       \t\treturn (
       \t\t\t${2:<div>${3}</div>}
-      \t\t);
+      \t\t)${4:;}
       \t}
       }
-
-      export default ${1:Foo};
     """
 
   'Stateless Component':
@@ -206,11 +204,9 @@
     body: """
       import React from 'react';
 
-      function ${1:Foo}(${2}) {
+      export default function ${1:Foo}(${2}) {
       \treturn (
       \t\t${3:<div>${4}</div>}
-      \t);
+      \t)
       }
-
-      export default ${1:Foo};
     """
