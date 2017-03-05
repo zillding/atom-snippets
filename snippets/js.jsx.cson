@@ -167,6 +167,23 @@
     prefix: 'state'
     body: 'this.state${1:.}'
 
+  ## others
+  'Destructure props':
+    prefix: 'dtp'
+    body: 'const {${1}} = this.props${2:;}'
+
+  'Destructure state':
+    prefix: 'dts'
+    body: 'const {${1}} = this.state${2:;}'
+
+  'Destructure context':
+    prefix: 'dtc'
+    body: 'const {${1}} = this.context${2:;}'
+
+  'Bind event handler':
+    prefix: 'btt'
+    body: 'this.${1:onClick} = this.${1:onClick}.bind(this)${2:;}'
+
   ## boilerplates
   'Class Component':
     prefix: 'rcc'
