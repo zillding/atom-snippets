@@ -190,13 +190,15 @@
     body: """
       import React, { Component, PropTypes } from 'react'${4:;}
 
-      export default class ${1:Foo} extends Component {
+      class ${1:Foo} extends Component {
       \trender() {
       \t\treturn (
       \t\t\t${2:<div>${3}</div>}
       \t\t)${4:;}
       \t}
       }
+
+      export default ${1:Foo};
     """
 
   'Stateless Component':
@@ -204,9 +206,11 @@
     body: """
       import React, { PropTypes } from 'react';
 
-      export default function ${1:Foo}(${2}) {
+      function ${1:Foo}(${2}) {
       \treturn (
       \t\t${3:<div>${4}</div>}
       \t)${5:;}
       }
+
+      export default ${1:Foo};
     """
